@@ -1,0 +1,76 @@
+body {
+  background-color: #fbfafc;
+}
+
+.card-box {
+  transition: transform 0.2s ease-in;
+}
+
+.card-box:hover {
+  transform: scale(1.2);
+}
+
+.genre-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+}
+
+.link-style {
+  border-bottom: 2px solid gold;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.nav-links {
+  margin-right: 40px;
+}
+
+.nav-links:last-child {
+  margin-right: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.form-container {
+  max-width: 560px;
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 60px;
+  box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px,
+    rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+  margin: 50px auto;
+}
+
+.profile-container {
+  max-width: 500px;
+  border-radius: 20px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 60px;
+  box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px,
+    rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+  margin: 50px auto;
+}
+
+.profile-button {
+  display: flex;
+  justify-content: center;
+}
+
+.img-center {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-card {
+  background: #fff;
+  box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px,
+    rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+  padding: 20px;
+  border-left: 4px solid black;
+  margin-bottom: 20px;
+}
