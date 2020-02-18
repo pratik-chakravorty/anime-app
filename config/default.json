@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://<username>:<password>@cluster0-moj2h.mongodb.net/test?retryWrites=true&w=majority",
-  "jwtSecret": "putsecrethere!!"
+  "mongoURI": "mongodb+srv://pratik:psman1253@cluster0-moj2h.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "myreallllysecret"
 }
