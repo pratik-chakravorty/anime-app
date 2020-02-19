@@ -3,7 +3,8 @@ import {
   GET_PROFILES_SUCCESS,
   GET_PROFILE_SUCCESS,
   GET_PROFILE,
-  WATCHLIST_ADD_SUCCESS
+  WATCHLIST_ADD_SUCCESS,
+  WATCHLIST_REMOVE_SUCCESS
 } from "../actions/constants";
 
 const initialState = {
@@ -44,6 +45,16 @@ export default function(state = initialState, action) {
         profile: {
           ...state.profile,
           watchlist: [...state.profile.watchlist, payload]
+        }
+      };
+    case WATCHLIST_REMOVE_SUCCESS:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          watchlist: state.profile.watchlist.filter(
+            item => item.mal_id !== payload
+          )
         }
       };
     default:

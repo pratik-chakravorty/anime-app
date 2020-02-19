@@ -55,16 +55,10 @@ exports.addToWatchList = async (req, res) => {
 
 exports.removeWatchlist = async (req, res) => {
   const profile = await Profile.findOne({ user: req.user.id });
-  profile.watchlist = profile.watchlist.filter(
-    item => item.mal_id !== req.params.id
+  const newProfileWatchlist = profile.watchlist.filter(
+    item => item.mal_id !== Number(req.params.id)
   );
+  profile.watchlist = newProfileWatchlist;
   await profile.save();
   res.json(profile.watchlist);
-};
-
-exports.addToBlackList = async (req, res) => {
-  const profile = await Profile.findById(req.user.id);
-  profile.blackList.unshift(req.body);
-  await profile.save();
-  res.json({ msg: "Blacklist added!" });
 };

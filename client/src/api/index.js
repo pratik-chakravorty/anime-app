@@ -79,3 +79,7 @@ export const addWatchListApi = body => {
   };
   return axios.post("/api/profile/watchlist", body, config);
 };
+
+export const removeWatchlistApi = id => {
+  return axios.delete(`/api/profile/watchlist/${id}`);
+};

@@ -1,12 +1,15 @@
 import React from "react";
 import Card from "./Card";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { removeWatchlist } from "../actions/profileActions";
 import { Text, Button, Grid } from "@chakra-ui/core";
 
 function Profile() {
+  const dispatch = useDispatch();
   const { profile } = useSelector(state => state.profile);
   const { watchlist } = profile;
+  const handleWatchlistRemove = id => dispatch(removeWatchlist(id));
   return (
     <div>
       <div className="profile-card">
@@ -41,13 +44,15 @@ function Profile() {
         </Text>
         <Grid templateColumns="repeat(3, 1fr)" gap={5} marginBottom={10}>
           {watchlist.length > 0 &&
-            watchlist.map(anime => <Card anime={anime} key={anime.mal_id} />)}
+            watchlist.map(anime => (
+              <Card
+                anime={anime}
+                key={anime.mal_id}
+                deleteButton={true}
+                handleWatchlistRemove={handleWatchlistRemove}
+              />
+            ))}
         </Grid>
-      </div>
-      <div className="profile-text">
-        <Text fontSize="25px">
-          <b>Blacklist(0)</b>
-        </Text>
       </div>
     </div>
   );

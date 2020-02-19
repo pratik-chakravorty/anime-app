@@ -6,7 +6,9 @@ import {
   GET_PROFILES_SUCCESS,
   CREATE_PROFILE,
   WATCHLIST_ADD,
-  WATCHLIST_ADD_SUCCESS
+  WATCHLIST_ADD_SUCCESS,
+  WATCHLIST_REMOVE,
+  WATCHLIST_REMOVE_SUCCESS
 } from "./constants";
 
 //get current users profile
@@ -72,4 +74,19 @@ export const addWatchList = body => {
 export const addWatchListSuccess = payload => ({
   type: WATCHLIST_ADD_SUCCESS,
   payload
+});
+
+export const removeWatchlist = id => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+  return {
+    type: WATCHLIST_REMOVE,
+    id
+  };
+};
+
+export const removeWatchListSuccess = id => ({
+  type: WATCHLIST_REMOVE_SUCCESS,
+  payload: id
 });

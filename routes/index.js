@@ -65,16 +65,10 @@ router.post(
 );
 
 //remove items to watchlist
-router.post(
+router.delete(
   "/profile/watchlist/:id",
   catchErrors(auth),
   catchErrors(profileControllers.removeWatchlist)
 );
 
-//add items to blacklist
-router.post(
-  "/profile/blacklist",
-  catchErrors(auth),
-  catchErrors(profileControllers.addToBlackList)
-);
 module.exports = router;

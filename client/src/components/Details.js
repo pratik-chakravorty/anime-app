@@ -1,7 +1,11 @@
 import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Card from "./Card";
-import { addWatchList, getCurrentProfile } from "../actions/profileActions";
+import {
+  addWatchList,
+  removeWatchlist,
+  getCurrentProfile
+} from "../actions/profileActions";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "./Spinner";
 import {
@@ -44,12 +48,16 @@ function Details(props) {
     };
     dispatch(addWatchList(values));
   };
+
   const displayAlerts = alert => (
     <Alert status={alert.alertType} key={alert.id}>
       <AlertIcon />
       {alert.msg}
     </Alert>
   );
+  const isAddedToWatchList = () =>
+    profile.watchlist &&
+    profile.watchlist.some(item => item.mal_id === anime.mal_id);
   return isLoading || Object.keys(anime).length === 0 ? (
     <Spinner />
   ) : (
@@ -72,8 +80,7 @@ function Details(props) {
           </Text>
           {user && (
             <Fragment>
-              {profile.watchlist &&
-              profile.watchlist.some(item => item.mal_id === anime.mal_id) ? (
+              {isAddedToWatchList() ? (
                 "Added to Watchlist"
               ) : (
                 <Button
@@ -87,10 +94,15 @@ function Details(props) {
                   Add to Watchlist
                 </Button>
               )}
-
-              <Button variant="outline" variantColor="black" width="240px">
-                Add to Blacklist
-              </Button>
+              {isAddedToWatchList() && (
+                <Button
+                  variant="outline"
+                  variantColor="red"
+                  onClick={() => dispatch(removeWatchlist(anime.mal_id))}
+                >
+                  Delete from Watchlist
+                </Button>
+              )}
             </Fragment>
           )}
         </Box>

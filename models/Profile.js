@@ -32,26 +32,6 @@ const profileSchema = new mongoose.Schema({
         required: true
       }
     }
-  ],
-  blacklist: [
-    {
-      mal_id: {
-        type: Number,
-        required: true
-      },
-      title: {
-        type: String,
-        required: true
-      },
-      image_url: {
-        type: String,
-        required: true
-      },
-      episodes: {
-        type: String,
-        required: true
-      }
-    }
   ]
 });
 

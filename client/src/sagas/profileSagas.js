@@ -4,7 +4,8 @@ import {
   GET_PROFILE,
   GET_PROFILES,
   CREATE_PROFILE,
-  WATCHLIST_ADD
+  WATCHLIST_ADD,
+  WATCHLIST_REMOVE
 } from "../actions/constants";
 
 import { setAlert } from "../actions/alertAction";
@@ -12,13 +13,15 @@ import {
   getCurrentProfileApi,
   getAllProfilesApi,
   createProfileApi,
-  addWatchListApi
+  addWatchListApi,
+  removeWatchlistApi
 } from "../api";
 import {
   getCurrentProfile,
   getCurrentProfileSuccess,
   getCurrentProfilesSuccess,
-  addWatchListSuccess
+  addWatchListSuccess,
+  removeWatchListSuccess
 } from "../actions/profileActions";
 
 function* getProfileSaga() {
@@ -66,11 +69,23 @@ function* addWatchListSaga(action) {
   }
 }
 
+function* removeWatchListSaga(action) {
+  const { id } = action;
+  try {
+    yield call(removeWatchlistApi, id);
+    yield put(removeWatchListSuccess(id));
+    yield put(setAlert("Removed from watchlist", "success", { id: uuid.v4() }));
+  } catch (e) {
+    yield put(setAlert("Failed to remove", "error", { id: uuid.v4() }));
+  }
+}
+
 function* profileSaga() {
   yield takeLatest(GET_PROFILE, getProfileSaga);
   yield takeLatest(CREATE_PROFILE, createProfileSaga);
   yield takeLatest(GET_PROFILES, getProfilesSaga);
   yield takeLatest(WATCHLIST_ADD, addWatchListSaga);
+  yield takeLatest(WATCHLIST_REMOVE, removeWatchListSaga);
 }
 
 export default profileSaga;
