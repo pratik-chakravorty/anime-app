@@ -5,13 +5,15 @@ import {
   GET_PROFILES,
   CREATE_PROFILE,
   WATCHLIST_ADD,
-  WATCHLIST_REMOVE
+  WATCHLIST_REMOVE,
+  GET_PROFILE_BY_ID
 } from "../actions/constants";
 
 import { setAlert } from "../actions/alertAction";
 import {
   getCurrentProfileApi,
   getAllProfilesApi,
+  getProfileByIdApi,
   createProfileApi,
   addWatchListApi,
   removeWatchlistApi
@@ -19,7 +21,7 @@ import {
 import {
   getCurrentProfile,
   getCurrentProfileSuccess,
-  getCurrentProfilesSuccess,
+  getProfilesSuccess,
   addWatchListSuccess,
   removeWatchListSuccess
 } from "../actions/profileActions";
@@ -36,7 +38,7 @@ function* getProfileSaga() {
 function* getProfilesSaga() {
   try {
     const { data } = yield call(getAllProfilesApi);
-    yield put(getCurrentProfilesSuccess(data));
+    yield put(getProfilesSuccess(data));
   } catch (err) {
     console.log(err);
   }
@@ -46,6 +48,7 @@ function* createProfileSaga(action) {
   const body = action.body;
   try {
     const { data } = yield call(createProfileApi, body);
+    console.log("data", data);
     yield put(getCurrentProfileSuccess(data));
     yield put(setAlert("Profile Created", "success", { id: uuid.v4() }));
   } catch (err) {
@@ -80,8 +83,19 @@ function* removeWatchListSaga(action) {
   }
 }
 
+function* getProfileByIdSaga(action) {
+  const { id } = action;
+  try {
+    const { data } = yield call(getProfileByIdApi, id);
+    yield put(getCurrentProfileSuccess(data));
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 function* profileSaga() {
   yield takeLatest(GET_PROFILE, getProfileSaga);
+  yield takeLatest(GET_PROFILE_BY_ID, getProfileByIdSaga);
   yield takeLatest(CREATE_PROFILE, createProfileSaga);
   yield takeLatest(GET_PROFILES, getProfilesSaga);
   yield takeLatest(WATCHLIST_ADD, addWatchListSaga);

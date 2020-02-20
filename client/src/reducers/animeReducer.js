@@ -26,7 +26,6 @@ export default function(state = initialState, action) {
         showMoreLoading: true
       };
     case FETCH_STUDIO_ANIME_SUCCESS:
-    case FETCH_STUDIO_ANIME_SUCCESS:
     case FETCH_ANIME_SUCCESS:
       return {
         ...state,

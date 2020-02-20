@@ -1,5 +1,6 @@
 import {
   GET_PROFILES,
+  GET_PROFILE_BY_ID,
   GET_PROFILES_SUCCESS,
   GET_PROFILE_SUCCESS,
   GET_PROFILE,
@@ -9,7 +10,7 @@ import {
 
 const initialState = {
   profile: {},
-  profiles: {},
+  profiles: [],
   loading: false,
   error: {}
 };
@@ -18,6 +19,11 @@ export default function(state = initialState, action) {
   const { payload, type } = action;
   switch (type) {
     case GET_PROFILE:
+      return {
+        ...state,
+        loading: true
+      };
+    case GET_PROFILE_BY_ID:
       return {
         ...state,
         loading: true

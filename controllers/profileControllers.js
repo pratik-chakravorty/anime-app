@@ -1,4 +1,5 @@
 const Profile = require("../models/Profile");
+const mongoose = require("mongoose");
 const User = require("../models/User");
 
 exports.currentUserProfile = async (req, res) => {
@@ -9,17 +10,30 @@ exports.currentUserProfile = async (req, res) => {
   if (!profile) {
     return res.status(400).json({ msg: "There is no profile for this user" });
   }
+
   res.json(profile);
 };
 
 exports.getAllProfiles = async (req, res) => {
   const profiles = await Profile.find().populate("user", ["name", "avatar"]);
-  if (!profiles) {
+  //remove the currently logged in user's profile
+  const finalProfiles = profiles.filter(
+    profile => profile.user._id.toString() !== req.user.id
+  );
+  console.log(finalProfiles);
+  if (!finalProfiles) {
     return res.status(400).json({ msg: "There are no profiles" });
   }
-  res.json(profiles);
+  res.json(finalProfiles);
 };
 
+exports.getProfileById = async (req, res) => {
+  const profile = await Profile.findById(req.params.id).populate("user", [
+    "name",
+    "avatar"
+  ]);
+  return res.json(profile);
+};
 exports.createUserProfile = async (req, res) => {
   const { aboutMe, location } = req.body;
   const profileFields = {};

@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Formik, Field } from "formik";
-import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createProfile } from "../actions/profileActions";
 import * as Yup from "yup";
@@ -26,7 +25,6 @@ const profileSchema = Yup.object().shape({
 
 function ProfileForm() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const { profile } = useSelector(state => state.profile);
   const alerts = useSelector(state => state.alerts);
 
@@ -49,7 +47,6 @@ function ProfileForm() {
         onSubmit={(values, actions) => {
           dispatch(createProfile(values));
           actions.setSubmitting(false);
-          history.push("/dashboard");
         }}
       >
         {props => (

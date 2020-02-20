@@ -3,6 +3,7 @@ import {
   GET_PROFILE_SUCCESS,
   GET_PROFILE,
   GET_PROFILES,
+  GET_PROFILE_BY_ID,
   GET_PROFILES_SUCCESS,
   CREATE_PROFILE,
   WATCHLIST_ADD,
@@ -21,7 +22,17 @@ export const getCurrentProfile = () => {
   };
 };
 
-export const getCurrentProfiles = () => {
+export const getProfileById = id => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+  return {
+    type: GET_PROFILE_BY_ID,
+    id
+  };
+};
+
+export const getProfiles = () => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
@@ -41,7 +52,7 @@ export const getCurrentProfileSuccess = payload => {
   };
 };
 
-export const getCurrentProfilesSuccess = payload => {
+export const getProfilesSuccess = payload => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }

@@ -71,4 +71,10 @@ router.delete(
   catchErrors(profileControllers.removeWatchlist)
 );
 
+router.get(
+  "/profile/:id",
+  catchErrors(auth),
+  catchErrors(profileControllers.getProfileById)
+);
+
 module.exports = router;

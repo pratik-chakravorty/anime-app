@@ -29,7 +29,7 @@ function Search() {
         onInputChange={handleInputChange}
       />
       {Object.keys(searchData).length > 0 && (
-        <div style={{ marginTop: "20px" }}>
+        <div style={{ marginTop: "60px" }}>
           <Card anime={searchData} />
         </div>
       )}

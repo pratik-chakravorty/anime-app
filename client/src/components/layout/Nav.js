@@ -30,6 +30,9 @@ function Nav() {
             <Link to="/dashboard" className="nav-links">
               Profile
             </Link>
+            <Link to="/users" className="nav-links">
+              Users
+            </Link>
             <Link
               to="/login"
               className="nav-links"

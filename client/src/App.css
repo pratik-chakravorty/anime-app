@@ -74,3 +74,8 @@ body {
   border-left: 4px solid black;
   margin-bottom: 20px;
 }
+
+.profiles-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
