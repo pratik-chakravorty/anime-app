@@ -40,8 +40,8 @@ function ProfileForm() {
       {alerts && alerts.length > 0 && alerts.map(alert => displayAlerts(alert))}
       <Formik
         initialValues={{
-          aboutMe: profile.aboutMe || "",
-          location: profile.location || ""
+          aboutMe: profile ? profile.aboutMe : "",
+          location: profile ? profile.location : ""
         }}
         validationSchema={profileSchema}
         onSubmit={(values, actions) => {

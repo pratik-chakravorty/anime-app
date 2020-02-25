@@ -5,12 +5,14 @@ const {
   userValidationRules,
   loginValidationRules,
   profileValidationRules,
+  postValidationRules,
   validate
 } = require("../middleware/validator");
 const auth = require("../middleware/auth");
 const userControllers = require("../controllers/userControllers");
 const authControllers = require("../controllers/authControllers");
 const profileControllers = require("../controllers/profileControllers");
+const postControllers = require("../controllers/postControllers");
 
 //save user in DB and send back token
 router.post(
@@ -75,6 +77,32 @@ router.get(
   "/profile/:id",
   catchErrors(auth),
   catchErrors(profileControllers.getProfileById)
+);
+
+router.get(
+  "/posts/me",
+  catchErrors(auth),
+  catchErrors(postControllers.getCurrentUserPosts)
+);
+
+router.post(
+  "/posts",
+  catchErrors(auth),
+  postValidationRules(),
+  validate,
+  catchErrors(postControllers.savePosts)
+);
+
+router.get(
+  "/posts",
+  catchErrors(auth),
+  catchErrors(postControllers.getAllPosts)
+);
+
+router.get(
+  "/posts/:id",
+  catchErrors(auth),
+  catchErrors(postControllers.getPostById)
 );
 
 module.exports = router;

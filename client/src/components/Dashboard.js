@@ -23,31 +23,41 @@ function Dashboard(props) {
       {alert.msg}
     </Alert>
   );
-  return loading || profile.user === undefined ? (
-    <Spinner />
-  ) : (
-    <div className="container">
-      {alerts && alerts.length > 0 && alerts.map(alert => displayAlerts(alert))}
-      <div className="img-center">
-        <Avatar size="2xl" src={profile.user.avatar} mt={10} />
+  let render = null;
+  if (loading) {
+    render = <Spinner />;
+  } else if (!profile) {
+    render = (
+      <Box className="profile-container">
+        <Text fontSize="xl" textAlign="center" mb={5}>
+          Please create your profile
+        </Text>
+        <Link to="/manage" className="profile-button">
+          <Button>Create Profile</Button>
+        </Link>
+      </Box>
+    );
+  } else {
+    render = (
+      <div className="container">
+        {alerts &&
+          alerts.length > 0 &&
+          alerts.map(alert => displayAlerts(alert))}
+        <div className="img-center">
+          <Avatar
+            size="2xl"
+            src={profile && profile.user && profile.user.avatar}
+            mt={10}
+          />
+        </div>
+        <Text fontSize="5xl" textAlign="center">
+          <b>{profile && profile.user && profile.user.name}</b>
+        </Text>
+        {Object.keys(profile).length > 0 && <Profile profile={profile} />}
       </div>
-      <Text fontSize="5xl" textAlign="center">
-        <b>{profile.user.name}</b>
-      </Text>
-      {Object.keys(profile).length > 0 ? (
-        <Profile profile={profile} />
-      ) : (
-        <Box className="profile-container">
-          <Text fontSize="xl" textAlign="center" mb={5}>
-            Please create your profile
-          </Text>
-          <Link to="/manage" className="profile-button">
-            <Button>Create Profile</Button>
-          </Link>
-        </Box>
-      )}
-    </div>
-  );
+    );
+  }
+  return render;
 }
 
 export default Dashboard;

@@ -2,7 +2,16 @@ import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/authActions";
 import { Link } from "react-router-dom";
-import { Box, Text } from "@chakra-ui/core";
+import {
+  Box,
+  Text,
+  Menu,
+  Button,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  MenuGroup
+} from "@chakra-ui/core";
 
 function Nav() {
   const dispatch = useDispatch();
@@ -27,19 +36,35 @@ function Nav() {
         </Link>
         {isAuthenticated ? (
           <Fragment>
-            <Link to="/dashboard" className="nav-links">
-              Profile
+            <Link to="/add-post" className="nav-links">
+              + Add Post
             </Link>
             <Link to="/users" className="nav-links">
               Users
             </Link>
-            <Link
-              to="/login"
-              className="nav-links"
-              onClick={() => dispatch(logout())}
-            >
-              Logout
+            <Link to="/allPost" className="nav-links">
+              All Posts
             </Link>
+            <Menu>
+              <MenuButton>Account</MenuButton>
+              <MenuList>
+                <MenuItem>
+                  <Link to="/dashboard" className="nav-links">
+                    Profile
+                  </Link>
+                </MenuItem>
+
+                <MenuItem>
+                  <Link
+                    to="/login"
+                    className="nav-links"
+                    onClick={() => dispatch(logout())}
+                  >
+                    Logout
+                  </Link>
+                </MenuItem>
+              </MenuList>
+            </Menu>
           </Fragment>
         ) : (
           <Fragment>

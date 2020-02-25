@@ -7,6 +7,9 @@ import AuthRoute from "./components/routing/AuthRoute";
 import { loadUser } from "./actions/authActions";
 import AnimeList from "./components/AnimeList";
 import Users from "./components/Users";
+import AddPost from "./components/AddPost";
+import Post from "./components/Post";
+import AllPost from "./components/AllPost";
 import Genre from "./components/Genre";
 import Dashboard from "./components/Dashboard";
 import Studio from "./components/Studio";
@@ -34,6 +37,9 @@ function App() {
         <Route exact path="/" component={AnimeList} />
         <AuthRoute exact path="/register" component={Register} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/allPost" component={AllPost} />
+        <PrivateRoute path="/add-post" component={AddPost} />
+        <PrivateRoute path="/post/:id" component={Post} />
         <PrivateRoute path="/profile/:id" component={Dashboard} />
         <PrivateRoute path="/users" component={Users} />
         <PrivateRoute path="/manage" component={ProfileForm} />

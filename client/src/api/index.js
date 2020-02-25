@@ -87,3 +87,20 @@ export const removeWatchlistApi = id => {
 export const getProfileByIdApi = id => {
   return axios.get(`/api/profile/${id}`);
 };
+
+export const addPostApi = body => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  return axios.post("api/posts", body, config);
+};
+
+export const getAllPostApi = () => {
+  return axios.get("/api/posts");
+};
+
+export const getPostById = id => {
+  return axios.get(`/api/posts/${id}`);
+};

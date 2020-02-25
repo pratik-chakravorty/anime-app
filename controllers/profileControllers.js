@@ -1,15 +1,9 @@
 const Profile = require("../models/Profile");
-const mongoose = require("mongoose");
-const User = require("../models/User");
 
 exports.currentUserProfile = async (req, res) => {
   const profile = await Profile.findOne({
     user: req.user.id
   }).populate("user", ["name", "avatar"]);
-
-  if (!profile) {
-    return res.status(400).json({ msg: "There is no profile for this user" });
-  }
 
   res.json(profile);
 };

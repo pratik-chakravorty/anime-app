@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Box, Image, Text, Grid } from "@chakra-ui/core";
+import { Box, Image, Text, Grid, Button } from "@chakra-ui/core";
 
-function Card({ anime }) {
+function Card({ anime, ...props }) {
   return (
     <Link to={`/details/${anime.mal_id}`}>
       <Box
+        {...props}
         overflow="hidden"
         backgroundColor="white"
         className="card-box"

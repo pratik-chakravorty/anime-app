@@ -39,12 +39,24 @@ const profileValidationRules = () => {
   ];
 };
 
+const postValidationRules = () => {
+  return [
+    check("title", "This field is required")
+      .not()
+      .isEmpty(),
+    check("description", "This field is required")
+      .not()
+      .isEmpty()
+  ];
+};
+
 const validate = (req, res, next) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
     return next();
   }
   const extractedErrors = [];
+  console.log("hii");
   errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }));
   return res.status(422).json({
     errors: extractedErrors
@@ -55,5 +67,6 @@ module.exports = {
   userValidationRules,
   loginValidationRules,
   profileValidationRules,
+  postValidationRules,
   validate
 };
